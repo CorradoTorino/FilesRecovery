@@ -5,16 +5,21 @@ class FileProcessor:
     '''A File Processor class to detect files and folders.'''
 
     def __init__(self, path):
-        self.path = path
+        start = "\\"
+        if(path.startswith(start)):
+            self.path = os.getcwd() + path
+        else:
+            self.path = path
+        
         self.fileListReport = ''
 
     def Run(self):
-        self.fileListReport = self.path
-        self.ListFiles()
+        if(self.CheckPath()):
+            self.ListFiles()
 
     def SimulateListFiles(self):
         self.fileListReport += "\n"
-        self.fileListReport += "/SD/Folder1/Text1.txt"
+        self.fileListReport += r"\SD\Folder1\Text1.txt"
         
     def ListFiles(self):
         # r=root, d=directories, f = files
@@ -23,28 +28,37 @@ class FileProcessor:
                 self.fileListReport += '\n'
                 self.fileListReport += os.path.join(r, file)
 
+    def CheckPath(self):
+        if(os.path.isdir(self.path)):
+            self.fileListReport = self.path
+            return True
+        else:
+            self.fileListReport += "[Error: Path does not exist] "
+            self.fileListReport += self.path
+            return False
+
 class FileProcessorTest(unittest.TestCase):
 
     def test_FileProcessorListFile_Constructor(self):
-        fileLister = FileProcessor("/SD/Folder1")
+        fileLister = FileProcessor(r"\SD\Folder1")
         self.assertEqual(fileLister.fileListReport, "")
 
     def test_FileProcessorListFile_PathNotExist(self):
-        fileLister = FileProcessor("/SD/DoesNotExist")
+        fileLister = FileProcessor(r"\SD\DoesNotExist")
         fileLister.Run()
-        self.assertEqual(fileLister.fileListReport, "[Error: Path does not exist] /SD/DoesNotExist", "Incorrect Report generated.")
+        self.assertEqual(fileLister.fileListReport, "[Error: Path does not exist] " + os.getcwd() + r"\SD\DoesNotExist", "Incorrect Report generated.")
 
     def test_FileProcessorListFile_Run(self):
-        fileLister = FileProcessor("/SD/Folder1")
+        fileLister = FileProcessor(r"\SD\Folder1")
         fileLister.Run()
-        self.assertEqual(fileLister.fileListReport, "/SD/Folder1")
+        self.assertEqual(fileLister.fileListReport, r"\SD\Folder1")
 
     def test_FileProcessorListFile_SimulateListFiles(self):
-        fileLister = FileProcessor("/SD/Folder1")
+        fileLister = FileProcessor(r"\SD\Folder1")
         fileLister.Run()
         fileLister.SimulateListFiles()
         
-        expectedReport = ['/SD/Folder1','/SD/Folder1/Text1.txt']
+        expectedReport = [r'\SD\Folder1',r'\SD\Folder1\Text1.txt']
         actualReport = fileLister.fileListReport.splitlines()
         self.assertListEqual(expectedReport, actualReport, "fileListReport does not contain the expected values.")
 
