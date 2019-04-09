@@ -16,14 +16,10 @@ class FileProcessor:
     def Run(self):
         if(self.CheckPath()):
             self.ListFiles()
-
-    def SimulateListFiles(self):
-        self.fileListReport += "\n"
-        self.fileListReport += r"\SD\Folder1\Text1.txt"
-        
+    
     def ListFiles(self):
         # r=root, d=directories, f = files
-        for r, d, f in os.walk(self.path):
+        for r, _, f in os.walk(self.path):
             for file in f:
                 self.fileListReport += '\n'
                 self.fileListReport += os.path.join(r, file)
@@ -49,16 +45,10 @@ class FileProcessorTest(unittest.TestCase):
         self.assertEqual(fileLister.fileListReport, "[Error: Path does not exist] " + os.getcwd() + r"\SD\DoesNotExist", "Incorrect Report generated.")
 
     def test_FileProcessorListFile_Run(self):
-        fileLister = FileProcessor(r"\SD\Folder1")
+        fileLister = FileProcessor(r"\Tests\SD\Folder1")
         fileLister.Run()
-        self.assertEqual(fileLister.fileListReport, r"\SD\Folder1")
 
-    def test_FileProcessorListFile_SimulateListFiles(self):
-        fileLister = FileProcessor(r"\SD\Folder1")
-        fileLister.Run()
-        fileLister.SimulateListFiles()
-        
-        expectedReport = [r'\SD\Folder1',r'\SD\Folder1\Text1.txt']
+        expectedReport = [os.getcwd() + r'\Tests\SD\Folder1', os.getcwd() + r'\Tests\SD\Folder1\Text1.txt']
         actualReport = fileLister.fileListReport.splitlines()
         self.assertListEqual(expectedReport, actualReport, "fileListReport does not contain the expected values.")
 

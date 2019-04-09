@@ -1,1 +1,3 @@
-test if the path folder does not exist
+test if the path folder does not exist DONE
+test if there are subfolders
+
