@@ -15,9 +15,9 @@ class FileProcessor:
 
     def Run(self):
         if(self.CheckPath()):
-            self.ListFiles()
+            self.__ListFiles()
     
-    def ListFiles(self):
+    def __ListFiles(self):
         # r=root, d=directories, f = files
         for r, d, f in os.walk(self.path):
             for directory in d:
