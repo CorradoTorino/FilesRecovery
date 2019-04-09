@@ -19,7 +19,11 @@ class FileProcessor:
     
     def ListFiles(self):
         # r=root, d=directories, f = files
-        for r, _, f in os.walk(self.path):
+        for r, d, f in os.walk(self.path):
+            for directory in d:
+                self.fileListReport += '\n'
+                self.fileListReport += os.path.join(r, directory)
+
             for file in f:
                 self.fileListReport += '\n'
                 self.fileListReport += os.path.join(r, file)
@@ -47,9 +51,38 @@ class FileProcessorTest(unittest.TestCase):
     def test_FileProcessorListFile_Run(self):
         fileLister = FileProcessor(r"\Tests\SD\Folder1")
         fileLister.Run()
-
-        expectedReport = [os.getcwd() + r'\Tests\SD\Folder1', os.getcwd() + r'\Tests\SD\Folder1\Text1.txt']
+        expectedReport = [
+            os.getcwd() + r'\Tests\SD\Folder1',
+            os.getcwd() + r'\Tests\SD\Folder1\Text1.txt']
         actualReport = fileLister.fileListReport.splitlines()
+        self.assertListEqual(expectedReport, actualReport, "fileListReport does not contain the expected values.")
+
+    def test_FileProcessorListFile_Run_FolderWithFileAndEmptyFolder(self):
+        fileLister = FileProcessor(r"\Tests\SD\FolderWithFileAndEmptyFolder")
+        fileLister.Run()
+
+        expectedReport = [
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndEmptyFolder',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndEmptyFolder\EmptyFolder',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndEmptyFolder\Text1.txt']
+        actualReport = fileLister.fileListReport.splitlines()
+        self.assertListEqual(expectedReport, actualReport, "fileListReport does not contain the expected values.")
+
+    def test_FileProcessorListFile_Run_FolderWithFileAndSubFolderUntileLevel3(self):
+        fileLister = FileProcessor(r"\Tests\SD\FolderWithFileAndSubFolderUntileLevel3")
+        fileLister.Run()
+
+        expectedReport = [
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\Level1.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\SubFolderLevel2',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\Level2a.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\Level2b.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\SubFolderLevel2\Level3a.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\SubFolderLevel2\Level3b.txt',]
+        actualReport = fileLister.fileListReport.splitlines()
+        self.assertEqual(len(expectedReport), len(actualReport), "fileListReport does not contain the expected number of entries.")
         self.assertListEqual(expectedReport, actualReport, "fileListReport does not contain the expected values.")
 
 if __name__ == '__main__':
