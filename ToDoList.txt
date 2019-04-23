@@ -1,4 +1,4 @@
 test if the path folder does not exist DONE
-test if there are subfolders
+test if there are subfolders DONE
 
-test FolderWithFileAndSubFolderWithFile
+test FolderWithFileAndSubFolderWithFile DONE

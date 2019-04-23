@@ -46,20 +46,25 @@ class FileProcessorTest(unittest.TestCase):
     def test_FileProcessorListFile_PathNotExist(self):
         fileLister = FileProcessor(r"\SD\DoesNotExist")
         fileLister.Run()
+        print(fileLister.fileListReport)
+
         self.assertEqual(fileLister.fileListReport, "[Error: Path does not exist] " + os.getcwd() + r"\SD\DoesNotExist", "Incorrect Report generated.")
 
-    def test_FileProcessorListFile_Run(self):
-        fileLister = FileProcessor(r"\Tests\SD\Folder1")
+    def test_FileProcessorListFile_Run_FolderWithFile(self):
+        fileLister = FileProcessor(r"\Tests\SD\FolderWithFile")
         fileLister.Run()
+        print(fileLister.fileListReport)
+
         expectedReport = [
-            os.getcwd() + r'\Tests\SD\Folder1',
-            os.getcwd() + r'\Tests\SD\Folder1\Text1.txt']
+            os.getcwd() + r'\Tests\SD\FolderWithFile',
+            os.getcwd() + r'\Tests\SD\FolderWithFile\Text1.txt']
         actualReport = fileLister.fileListReport.splitlines()
         self.assertListEqual(expectedReport, actualReport, "fileListReport does not contain the expected values.")
 
     def test_FileProcessorListFile_Run_FolderWithFileAndEmptyFolder(self):
         fileLister = FileProcessor(r"\Tests\SD\FolderWithFileAndEmptyFolder")
         fileLister.Run()
+        print(fileLister.fileListReport)
 
         expectedReport = [
             os.getcwd() + r'\Tests\SD\FolderWithFileAndEmptyFolder',
@@ -71,6 +76,7 @@ class FileProcessorTest(unittest.TestCase):
     def test_FileProcessorListFile_Run_FolderWithFileAndSubFolderUntileLevel3(self):
         fileLister = FileProcessor(r"\Tests\SD\FolderWithFileAndSubFolderUntileLevel3")
         fileLister.Run()
+        print(fileLister.fileListReport)
 
         expectedReport = [
             os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3',
