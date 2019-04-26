@@ -1,4 +1,5 @@
 import os
+from shutil import copyfile
 
 class FileProcessor:
     '''A File Processor class to detect files and folders.'''
@@ -37,6 +38,12 @@ class FileProcessor:
             for file in f:
                 self.fileListReport += '\n'
                 self.fileListReport += os.path.join(r, file)
+
+                if self.destinationPath is not None:
+                    src = os.path.join(r, file)
+                    directoryName = os.path.split(r)[1]
+                    dst = os.path.join(self.destinationPath, directoryName, file)
+                    copyfile(src, dst)
 
     def CheckPath(self):
         if(os.path.isdir(self.inputPath)):

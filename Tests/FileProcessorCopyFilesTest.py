@@ -16,7 +16,7 @@ class FileProcessorCopyFilesTest(unittest.TestCase):
             os.getcwd() + r'\Tests\SD\EmptyFolder',]
         expectedReportForDestination = [
             os.getcwd() + r'\Tests\TestOuput',
-                os.getcwd() + r'\Tests\TestOuput\EmptyFolder',]
+            os.getcwd() + r'\Tests\TestOuput\EmptyFolder',]
         
         self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport, expectedReportForDestination)
 
@@ -29,7 +29,12 @@ class FileProcessorCopyFilesTest(unittest.TestCase):
             os.getcwd() + r'\Tests\SD\FolderWithFile',
             os.getcwd() + r'\Tests\SD\FolderWithFile\Text1.txt']
         
-        self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport)
+        expectedReportForDestination = [
+            os.getcwd() + r'\Tests\TestOuput',
+            os.getcwd() + r'\Tests\TestOuput\FolderWithFile',
+            os.getcwd() + r'\Tests\TestOuput\FolderWithFile\Text1.txt']
+        
+        self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport, expectedReportForDestination)
 
     def __cleanTestOuput(self):     
         testOuputDirectory = os.getcwd() + r"\Tests\TestOuput" 
