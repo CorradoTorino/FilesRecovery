@@ -1,6 +1,8 @@
 import unittest
 import os
 import sys
+import shutil
+
 from FileProcessor import FileProcessor
 
 class FileProcessorListFileTest(unittest.TestCase):
@@ -10,6 +12,15 @@ class FileProcessorListFileTest(unittest.TestCase):
 
         expectedReport = ["[Error: Path does not exist] " + os.getcwd() + r"\SD\DoesNotExist"]
 
+        self.__testFileProcessorListing(inputFolder, expectedReport)
+
+    def test_FileProcessorListFile_Run_EmptyFolder(self):
+
+        inputFolder = r"\Tests\SD\EmptyFolder"
+        
+        expectedReport = [
+            os.getcwd() + r'\Tests\SD\EmptyFolder',]
+        
         self.__testFileProcessorListing(inputFolder, expectedReport)
 
     def test_FileProcessorListFile_Run_FolderWithFile(self):
