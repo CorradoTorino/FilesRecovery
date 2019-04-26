@@ -14,11 +14,8 @@ class FileProcessorCopyFilesTest(unittest.TestCase):
 
         expectedReport = [
             os.getcwd() + r'\Tests\SD\EmptyFolder',]
-        expectedReportForDestination = [
-            os.getcwd() + r'\Tests\TestOuput',
-            os.getcwd() + r'\Tests\TestOuput\EmptyFolder',]
-        
-        self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport, expectedReportForDestination)
+                          
+        self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport)
 
     def test_FileProcessorCopyFilesTest_Run_FolderWithFile(self):
         
@@ -29,12 +26,7 @@ class FileProcessorCopyFilesTest(unittest.TestCase):
             os.getcwd() + r'\Tests\SD\FolderWithFile',
             os.getcwd() + r'\Tests\SD\FolderWithFile\Text1.txt']
         
-        expectedReportForDestination = [
-            os.getcwd() + r'\Tests\TestOuput',
-            os.getcwd() + r'\Tests\TestOuput\FolderWithFile',
-            os.getcwd() + r'\Tests\TestOuput\FolderWithFile\Text1.txt']
-        
-        self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport, expectedReportForDestination)
+        self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport)
 
     def test_FileProcessorCopyFilesTest_Run_FolderWithFileAndEmptyFolder(self):
 
@@ -45,13 +37,8 @@ class FileProcessorCopyFilesTest(unittest.TestCase):
             os.getcwd() + r'\Tests\SD\FolderWithFileAndEmptyFolder',
             os.getcwd() + r'\Tests\SD\FolderWithFileAndEmptyFolder\EmptyFolder',
             os.getcwd() + r'\Tests\SD\FolderWithFileAndEmptyFolder\Text1.txt']
-        expectedReportForDestination = [
-            os.getcwd() + r'\Tests\TestOuput',
-            os.getcwd() + r'\Tests\TestOuput\FolderWithFileAndEmptyFolder',
-            os.getcwd() + r'\Tests\TestOuput\FolderWithFileAndEmptyFolder\EmptyFolder',
-            os.getcwd() + r'\Tests\TestOuput\FolderWithFileAndEmptyFolder\Text1.txt']
         
-        self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport, expectedReportForDestination)
+        self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport)
 
     def __cleanTestOuput(self):     
         testOuputDirectory = os.getcwd() + r"\Tests\TestOuput" 
@@ -61,7 +48,7 @@ class FileProcessorCopyFilesTest(unittest.TestCase):
             pass
         os.mkdir(testOuputDirectory)
 
-    def __testFileProcessorCopying(self, inputFolder, outputFolder, expectedReport, expectedReportForDestination):
+    def __testFileProcessorCopying(self, inputFolder, outputFolder, expectedReport):
             self.__cleanTestOuput()
 
             fileCopier = FileProcessor(inputFolder, outputFolder)
@@ -71,17 +58,24 @@ class FileProcessorCopyFilesTest(unittest.TestCase):
             actualReport = fileCopier.fileListReport.splitlines()
             self.assertEqual(len(expectedReport), len(actualReport), "fileListReport does not contain the expected number of entries.")
             self.assertListEqual(expectedReport, actualReport, "fileListReport does not contain the expected values.")   
-
+            
+            expectedReportForDestination = [ os.getcwd() + r'\Tests\TestOuput',]
+            expectedReportForDestination.extend(expectedReport)
+            for i, s in enumerate(expectedReportForDestination):
+                outputFolderInReport = outputFolder + "\\"
+                outputFolderInReport = outputFolderInReport + os.path.split(inputFolder)[1]
+                expectedReportForDestination[i] = s.replace(inputFolder, outputFolderInReport)
+            
             self.__checkDirectoryTreeCopied(outputFolder, expectedReportForDestination)
 
-    def __checkDirectoryTreeCopied(self, destinationFolder, expectedReport):
+    def __checkDirectoryTreeCopied(self, destinationFolder, expectedReportForDestination):       
         fileLister = FileProcessor(destinationFolder)
         fileLister.Run()
         print(fileLister.fileListReport)
         
         actualReport = fileLister.fileListReport.splitlines()
-        self.assertEqual(len(expectedReport), len(actualReport), "fileListReport does not contain the expected number of entries.")
-        self.assertListEqual(expectedReport, actualReport, "fileListReport does not contain the expected values.")   
+        self.assertEqual(len(expectedReportForDestination), len(actualReport), "fileListReport does not contain the expected number of entries.")
+        self.assertListEqual(expectedReportForDestination, actualReport, "fileListReport does not contain the expected values.")   
 
 if __name__ == '__main__':
     unittest.main()
