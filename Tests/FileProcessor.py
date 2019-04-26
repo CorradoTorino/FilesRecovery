@@ -35,6 +35,11 @@ class FileProcessor:
                 self.fileListReport += '\n'
                 self.fileListReport += os.path.join(r, directory)
 
+                if self.destinationPath is not None:
+                    directoryName = os.path.split(r)[1]
+                    dst = os.path.join(self.destinationPath, directoryName, directory)
+                    os.mkdir(dst)
+
             for file in f:
                 self.fileListReport += '\n'
                 self.fileListReport += os.path.join(r, file)
