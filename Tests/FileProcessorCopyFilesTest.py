@@ -40,6 +40,23 @@ class FileProcessorCopyFilesTest(unittest.TestCase):
         
         self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport)
 
+    def test_FileProcessorListFile_Run_FolderWithFileAndSubFolderUntileLevel3(self):
+
+        inputFolder = r"\Tests\SD\FolderWithFileAndSubFolderUntileLevel3"
+        outputFolder = r"\Tests\TestOuput"
+
+        expectedReport = [
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\Level1.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\SubFolderLevel2',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\Level2a.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\Level2b.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\SubFolderLevel2\Level3a.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\SubFolderLevel2\Level3b.txt',]
+        
+        self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport)
+
     def __cleanTestOuput(self):     
         testOuputDirectory = os.getcwd() + r"\Tests\TestOuput" 
         try:

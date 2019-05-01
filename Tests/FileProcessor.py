@@ -28,17 +28,38 @@ class FileProcessor:
         if(self.CheckPath()):
             self.__ListFiles()
     
+    def __makeDirIfDoNotExist(self, path):
+        try:
+            os.mkdir(path)
+        except FileExistsError:
+            pass
+
     def __ListFiles(self):
+
+        destinationRoot = self.destinationPath
         # r=root, d=directories, f = files
         for r, d, f in os.walk(self.inputPath):
+            
+            if self.destinationPath is not None:
+                #relativeRoot = r.replace(self.inputPath, '')
+                
+                relativeRoot = r.replace(os.path.split(self.inputPath)[0], '')
+                #relativeRoot = os.path.join(os.path.split(os.path.split(r)[0])[1],os.path.split(r)[1])
+                if relativeRoot is '':
+                    destinationRoot = os.path.join(self.destinationPath, os.path.split(r)[1])
+                else:
+                    escapedBackslash = "\\"
+                    destinationRoot = os.path.join(self.destinationPath, relativeRoot.strip(escapedBackslash))
+                
+                self.__makeDirIfDoNotExist(destinationRoot)                
+
             for directory in d:
                 self.fileListReport += '\n'
                 self.fileListReport += os.path.join(r, directory)
 
-                if self.destinationPath is not None:
-                    directoryName = os.path.split(r)[1]
-                    dst = os.path.join(self.destinationPath, directoryName, directory)
-                    os.mkdir(dst)
+                if self.destinationPath is not None:        
+                    dst = os.path.join(destinationRoot, directory)
+                    self.__makeDirIfDoNotExist(dst)
 
             for file in f:
                 self.fileListReport += '\n'
@@ -46,19 +67,12 @@ class FileProcessor:
 
                 if self.destinationPath is not None:
                     src = os.path.join(r, file)
-                    directoryName = os.path.split(r)[1]
-                    dst = os.path.join(self.destinationPath, directoryName, file)
+                    dst = os.path.join(destinationRoot, file)
                     copyfile(src, dst)
 
     def CheckPath(self):
         if(os.path.isdir(self.inputPath)):
             self.fileListReport = self.inputPath
-
-            if self.destinationPath is not None:             
-                # create the directory in the destination folder
-                directoryName = os.path.split(self.inputPath)[1]
-                copiedDirectory = os.path.join(self.destinationPath, directoryName)
-                os.mkdir(copiedDirectory)
 
             return True
         else:

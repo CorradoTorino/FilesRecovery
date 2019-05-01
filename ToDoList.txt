@@ -5,6 +5,7 @@
 the test cleanuo will delete all the dirs but in the production code it can be a problem
 - remove duplication in set inou/out path in fileprocessor
 - understand if we need to define the destination folder with the neame of the input folder or we rename the folder itself according the destination path- investigate if we can removed the duplicated report for the copy tests
+- create tests with different Folders , in order to be sure is working also with the second listed folder
 
 test if the path folder does not exist DONE
 test if there are subfolders DONE
