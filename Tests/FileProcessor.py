@@ -45,6 +45,13 @@ class FileProcessor:
             self.__ProcessDirectories(root, directories, destinationRoot)
             self.__ProcessFiles(files, root, destinationRoot)
     
+
+        if self.__CopyEnabled:
+            reportPath = os.path.join(self.destinationPath, "Report.txt")
+            text_file = open(reportPath, "w")
+            text_file.write(self.Report)
+            text_file.close()
+
     def __ProcessFiles(self, files, root, destinationRoot):
         for file in files:
             self.Report += '\n'
