@@ -26,7 +26,7 @@ class FileProcessor:
 
     def Run(self):
         if(self.__ValidateInputPath()):
-            self.__ListFiles()
+            self.__Run()
     
     def __makeDir(self, path):
         try:
@@ -34,25 +34,16 @@ class FileProcessor:
         except FileExistsError:
             pass
 
-    def __ListFiles(self):
+    def __Run(self):
         destinationRoot = self.destinationPath
-        for roots, directories, files in os.walk(self.inputPath):
-            
-            if self.__CopyEnabled:
-                
-                relativeRoot = roots.replace(os.path.split(self.inputPath)[0], '')
-
-                if relativeRoot is '':
-                    destinationRoot = os.path.join(self.destinationPath, os.path.split(roots)[1])
-                else:
-                    escapedBackslash = "\\"
-                    destinationRoot = os.path.join(self.destinationPath, relativeRoot.strip(escapedBackslash))
-                
+        for root, directories, files in os.walk(self.inputPath):            
+            if self.__CopyEnabled:                
+                destinationRoot = self.__GetDestinationRoot(root)                
                 self.__makeDir(destinationRoot)             
 
             for directory in directories:
                 self.Report += '\n'
-                self.Report += os.path.join(roots, directory)
+                self.Report += os.path.join(root, directory)
 
                 if self.destinationPath is not None:        
                     dst = os.path.join(destinationRoot, directory)
@@ -60,12 +51,21 @@ class FileProcessor:
 
             for file in files:
                 self.Report += '\n'
-                self.Report += os.path.join(roots, file)
+                self.Report += os.path.join(root, file)
 
                 if self.destinationPath is not None:
-                    src = os.path.join(roots, file)
+                    src = os.path.join(root, file)
                     dst = os.path.join(destinationRoot, file)
                     copyfile(src, dst)
+
+    def __GetDestinationRoot(self, inputRoot):
+        relativeRoot = inputRoot.replace(os.path.split(self.inputPath)[0], '')
+        if relativeRoot is '':
+            destinationRoot = os.path.join(self.destinationPath, os.path.split(inputRoot)[1])
+        else:
+            escapedBackslash = "\\"
+            destinationRoot = os.path.join(self.destinationPath, relativeRoot.strip(escapedBackslash))
+        return destinationRoot
 
     def __ValidateInputPath(self):
         if(os.path.isdir(self.inputPath)):
