@@ -63,11 +63,11 @@ class FileProcessorListFileTest(unittest.TestCase):
     def __testFileProcessorListing(self, inputFolder, expectedReport):
         fileLister = FileProcessor(inputFolder)
         fileLister.Run()
-        print(fileLister.fileListReport)
+        print(fileLister.Report)
         
-        actualReport = fileLister.fileListReport.splitlines()
-        self.assertEqual(len(expectedReport), len(actualReport), "fileListReport does not contain the expected number of entries.")
-        self.assertListEqual(expectedReport, actualReport, "fileListReport does not contain the expected values.")
+        actualReport = fileLister.Report.splitlines()
+        self.assertEqual(len(expectedReport), len(actualReport), "The Report does not contain the expected number of entries.")
+        self.assertListEqual(expectedReport, actualReport, "The Report does not contain the expected values.")
 
 if __name__ == '__main__':
     unittest.main()

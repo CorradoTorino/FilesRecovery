@@ -1,7 +1,7 @@
 
 
 - add in the report on ok if the file has benn copied and an error if failed
-- test what happen if in the destinatio folder already exist a directory with the sane name as the input name
+- test what happen if in the destination folder already exist a directory with the same name as the input name
 the test cleanuo will delete all the dirs but in the production code it can be a problem
 - remove duplication in set inou/out path in fileprocessor
 - understand if we need to define the destination folder with the neame of the input folder or we rename the folder itself according the destination path- investigate if we can removed the duplicated report for the copy tests

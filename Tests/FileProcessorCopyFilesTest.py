@@ -102,9 +102,9 @@ class FileProcessorCopyFilesTest(unittest.TestCase):
 
             fileCopier = FileProcessor(inputFolder, outputFolder)
             fileCopier.Run()
-            print(fileCopier.fileListReport)
+            print(fileCopier.Report)
             
-            actualReport = fileCopier.fileListReport.splitlines()
+            actualReport = fileCopier.Report.splitlines()
             self.assertEqual(len(expectedReport), len(actualReport), "fileListReport does not contain the expected number of entries.")
             self.assertListEqual(expectedReport, actualReport, "fileListReport does not contain the expected values.")   
             
@@ -120,9 +120,9 @@ class FileProcessorCopyFilesTest(unittest.TestCase):
     def __checkDirectoryTreeCopied(self, destinationFolder, expectedReportForDestination):       
         fileLister = FileProcessor(destinationFolder)
         fileLister.Run()
-        print(fileLister.fileListReport)
+        print(fileLister.Report)
         
-        actualReport = fileLister.fileListReport.splitlines()
+        actualReport = fileLister.Report.splitlines()
         self.assertEqual(len(expectedReportForDestination), len(actualReport), "fileListReport does not contain the expected number of entries.")
         self.assertListEqual(expectedReportForDestination, actualReport, "fileListReport does not contain the expected values.")   
 
