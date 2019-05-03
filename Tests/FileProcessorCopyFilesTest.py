@@ -40,20 +40,52 @@ class FileProcessorCopyFilesTest(unittest.TestCase):
         
         self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport)
 
-    def test_FileProcessorListFile_Run_FolderWithFileAndSubFolderUntileLevel3(self):
+    def test_FileProcessorListFile_Run_FolderWithFileAndSubFolderLevel3(self):
 
-        inputFolder = r"\Tests\SD\FolderWithFileAndSubFolderUntileLevel3"
+        inputFolder = r"\Tests\SD\FolderWithFileAndSubFolderLevel3"
         outputFolder = r"\Tests\TestOuput"
 
         expectedReport = [
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\Level1.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\SubFolderLevel2',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\Level2a.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\Level2b.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\SubFolderLevel2\Level3a.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\SubFolderLevel2\Level3b.txt',]
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\Level1.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\SubFolderLevel2',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\Level2a.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\Level2b.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\SubFolderLevel2\Level3a.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\SubFolderLevel2\Level3b.txt',]
+        
+        self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport)
+
+    def test_FileProcessorListFile_Run_FolderWithFileAndSeveralSubFolderLevel3(self):
+
+        inputFolder = r"\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3"
+        outputFolder = r"\Tests\TestOuput"
+
+        expectedReport = [
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\Level1.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1\SubFolderLevel2',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1\Level2a.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1\Level2b.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1\SubFolderLevel2\Level3a.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1\SubFolderLevel2\Level3b.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2a',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2b',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2c',                
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\Level2a.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\Level2b.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2a\Level3a.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2a\Level3b.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2a\Level3c.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2a\Level3d.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2b\Level3a.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2b\Level3b.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2c\Level3a.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2c\Level3b.txt',   
+            ]
         
         self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport)
 

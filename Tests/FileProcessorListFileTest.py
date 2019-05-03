@@ -44,19 +44,19 @@ class FileProcessorListFileTest(unittest.TestCase):
         
         self.__testFileProcessorListing(inputFolder, expectedReport)
 
-    def test_FileProcessorListFile_Run_FolderWithFileAndSubFolderUntileLevel3(self):
+    def test_FileProcessorListFile_Run_FolderWithFileAndSubFolderLevel3(self):
 
-        inputFolder = r"\Tests\SD\FolderWithFileAndSubFolderUntileLevel3"
+        inputFolder = r"\Tests\SD\FolderWithFileAndSubFolderLevel3"
 
         expectedReport = [
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\Level1.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\SubFolderLevel2',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\Level2a.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\Level2b.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\SubFolderLevel2\Level3a.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderUntileLevel3\SubFolderLevel1\SubFolderLevel2\Level3b.txt',]
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\Level1.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\SubFolderLevel2',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\Level2a.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\Level2b.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\SubFolderLevel2\Level3a.txt',
+            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\SubFolderLevel2\Level3b.txt',]
         
         self.__testFileProcessorListing(inputFolder, expectedReport)
 
