@@ -42,22 +42,27 @@ class FileProcessor:
                 destinationRoot = self.__GetDestinationRoot(root)                
                 self.__makeDir(destinationRoot)             
 
-            for directory in directories:
-                self.Report += '\n'
-                self.Report += os.path.join(root, directory)
+            self.__ProcessDirectories(root, directories, destinationRoot)
+            self.__ProcessFiles(files, root, destinationRoot)
+    
+    def __ProcessFiles(self, files, root, destinationRoot):
+        for file in files:
+            self.Report += '\n'
+            self.Report += os.path.join(root, file)
 
-                if self.__CopyEnabled:        
-                    dst = os.path.join(destinationRoot, directory)
-                    self.__makeDir(dst)
+            if self.__CopyEnabled:
+                src = os.path.join(root, file)
+                dst = os.path.join(destinationRoot, file)
+                copyfile(src, dst)
 
-            for file in files:
-                self.Report += '\n'
-                self.Report += os.path.join(root, file)
+    def __ProcessDirectories(self, root, directories, destinationRoot):
+        for directory in directories:
+            self.Report += '\n'
+            self.Report += os.path.join(root, directory)
 
-                if self.__CopyEnabled:
-                    src = os.path.join(root, file)
-                    dst = os.path.join(destinationRoot, file)
-                    copyfile(src, dst)
+            if self.__CopyEnabled:        
+                dst = os.path.join(destinationRoot, directory)
+                self.__makeDir(dst)
 
     def __GetDestinationRoot(self, inputRoot):
         relativeRoot = inputRoot.replace(os.path.split(self.inputPath)[0], '')
