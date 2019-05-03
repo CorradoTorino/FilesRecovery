@@ -7,28 +7,22 @@ class FileProcessor:
     def __init__(self, inputPath, destinationPath = None):
         self.Report = ''
         self.__CopyEnabled = False
-        self.__setInputPath(inputPath) 
+        self.inputPath = self.__getAbsolutePath(inputPath) 
         self.__setDestinationPath(destinationPath)
 
-    def __setInputPath(self, inputPath):
-        escapedBackslash = "\\"
-        if inputPath.startswith(escapedBackslash):
-            self.inputPath = os.getcwd() + inputPath
-        else:
-            self.inputPath = inputPath
-
     def __setDestinationPath(self, destinationPath):
-        
         if destinationPath is not None:
             self.__CopyEnabled = True
-
-            escapedBackslash = "\\"
-            if destinationPath is None or destinationPath.startswith(escapedBackslash) is False:
-                self.destinationPath = destinationPath
-            else:
-                self.destinationPath = os.getcwd() + destinationPath
+            self.destinationPath = self.__getAbsolutePath(destinationPath)                
         else:
             self.destinationPath = None
+
+    def __getAbsolutePath(self, path):
+        escapedBackslash = "\\"
+        if path.startswith(escapedBackslash):
+            return os.getcwd() + path
+        else:
+            return path
 
     def Run(self):
         if(self.__ValidateInputPath()):
