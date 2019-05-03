@@ -2,7 +2,7 @@ import os
 from shutil import copyfile
 
 class FileProcessor:
-    '''A File Processor class to detect files and folders.'''
+    '''A File Processor class to list and copy files and folders'''
 
     def __init__(self, inputPath, destinationPath = None):
         self.Report = ''
@@ -36,7 +36,8 @@ class FileProcessor:
 
     def __Run(self):
         destinationRoot = self.destinationPath
-        for root, directories, files in os.walk(self.inputPath):            
+        for root, directories, files in os.walk(self.inputPath):   
+
             if self.__CopyEnabled:                
                 destinationRoot = self.__GetDestinationRoot(root)                
                 self.__makeDir(destinationRoot)             
@@ -45,7 +46,7 @@ class FileProcessor:
                 self.Report += '\n'
                 self.Report += os.path.join(root, directory)
 
-                if self.destinationPath is not None:        
+                if self.__CopyEnabled:        
                     dst = os.path.join(destinationRoot, directory)
                     self.__makeDir(dst)
 
@@ -53,7 +54,7 @@ class FileProcessor:
                 self.Report += '\n'
                 self.Report += os.path.join(root, file)
 
-                if self.destinationPath is not None:
+                if self.__CopyEnabled:
                     src = os.path.join(root, file)
                     dst = os.path.join(destinationRoot, file)
                     copyfile(src, dst)
