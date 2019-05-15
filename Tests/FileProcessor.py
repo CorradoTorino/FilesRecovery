@@ -46,6 +46,9 @@ class FileProcessor:
             self.__ProcessFiles(files, root, destinationRoot)
     
 
+        self.__PersistReport()
+
+    def __PersistReport(self):
         if self.__CopyEnabled:
             reportPath = os.path.join(self.destinationPath, "Report.txt")
             text_file = open(reportPath, "w")
@@ -54,18 +57,20 @@ class FileProcessor:
 
     def __ProcessFiles(self, files, root, destinationRoot):
         for file in files:
-            self.Report += '\n'
-            self.Report += os.path.join(root, file)
+            self.__ReportFile(root, file)
 
             if self.__CopyEnabled:
                 src = os.path.join(root, file)
                 dst = os.path.join(destinationRoot, file)
                 copyfile(src, dst)
 
+    def __ReportFile(self, root, file):
+        self.Report += '\n'
+        self.Report += os.path.join(root, file)
+
     def __ProcessDirectories(self, root, directories, destinationRoot):
         for directory in directories:
-            self.Report += '\n'
-            self.Report += os.path.join(root, directory)
+            self.__ReportFile(root, directory)
 
             if self.__CopyEnabled:        
                 dst = os.path.join(destinationRoot, directory)
