@@ -57,20 +57,28 @@ class FileProcessor:
 
     def __ProcessFiles(self, files, root, destinationRoot):
         for file in files:
-            self.__ReportFile(root, file)
-
+            success = 'OK'
             if self.__CopyEnabled:
                 src = os.path.join(root, file)
                 dst = os.path.join(destinationRoot, file)
-                copyfile(src, dst)
+                try:
+                    copyfile(src, dst)
+                except:
+                    success = 'ERROR'                 
 
-    def __ReportFile(self, root, file):
+            self.__ReportFile(root, file, success)
+
+    def __ReportFile(self, root, file, success):
         self.Report += '\n'
+        if self.__CopyEnabled:
+            self.Report += success
+            self.Report += '\t'
+
         self.Report += os.path.join(root, file)
 
     def __ProcessDirectories(self, root, directories, destinationRoot):
         for directory in directories:
-            self.__ReportFile(root, directory)
+            self.__ReportFile(root, directory, 'OK')
 
             if self.__CopyEnabled:        
                 dst = os.path.join(destinationRoot, directory)
@@ -87,7 +95,9 @@ class FileProcessor:
 
     def __ValidateInputPath(self):
         if(os.path.isdir(self.inputPath)):
-            self.Report = self.inputPath
+            if self.__CopyEnabled:
+                self.Report += 'OK\t'
+            self.Report += self.inputPath
             return True
         else:
             self.Report += "[Error: Path does not exist] "

@@ -13,7 +13,7 @@ class FileProcessorCopyFilesTest(unittest.TestCase):
         outputFolder = r"\Tests\TestOuput"
 
         expectedReport = [
-            os.getcwd() + r'\Tests\SD\EmptyFolder']
+            'OK\t' + os.getcwd() + r'\Tests\SD\EmptyFolder']
                           
         self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport)
 
@@ -23,8 +23,8 @@ class FileProcessorCopyFilesTest(unittest.TestCase):
         outputFolder = r"\Tests\TestOuput"
         
         expectedReport = [
-            os.getcwd() + r'\Tests\SD\FolderWithFile',
-            os.getcwd() + r'\Tests\SD\FolderWithFile\Text1.txt']
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFile',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFile\Text1.txt']
         
         self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport)
 
@@ -34,9 +34,9 @@ class FileProcessorCopyFilesTest(unittest.TestCase):
         outputFolder = r"\Tests\TestOuput"
         
         expectedReport = [
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndEmptyFolder',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndEmptyFolder\EmptyFolder',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndEmptyFolder\Text1.txt']
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndEmptyFolder',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndEmptyFolder\EmptyFolder',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndEmptyFolder\Text1.txt']
         
         self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport)
 
@@ -46,14 +46,14 @@ class FileProcessorCopyFilesTest(unittest.TestCase):
         outputFolder = r"\Tests\TestOuput"
 
         expectedReport = [
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\Level1.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\SubFolderLevel2',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\Level2a.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\Level2b.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\SubFolderLevel2\Level3a.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\SubFolderLevel2\Level3b.txt',]
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\Level1.txt',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\SubFolderLevel2',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\Level2a.txt',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\Level2b.txt',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\SubFolderLevel2\Level3a.txt',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSubFolderLevel3\SubFolderLevel1\SubFolderLevel2\Level3b.txt',]
         
         self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport)
 
@@ -63,28 +63,28 @@ class FileProcessorCopyFilesTest(unittest.TestCase):
         outputFolder = r"\Tests\TestOuput"
 
         expectedReport = [
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\Level1.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1\SubFolderLevel2',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1\Level2a.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1\Level2b.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1\SubFolderLevel2\Level3a.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1\SubFolderLevel2\Level3b.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2a',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2b',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2c',                
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\Level2a.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\Level2b.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2a\Level3a.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2a\Level3b.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2a\Level3c.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2a\Level3d.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2b\Level3a.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2b\Level3b.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2c\Level3a.txt',
-            os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2c\Level3b.txt',   
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\Level1.txt',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1\SubFolderLevel2',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1\Level2a.txt',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1\Level2b.txt',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1\SubFolderLevel2\Level3a.txt',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1\SubFolderLevel2\Level3b.txt',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2a',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2b',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2c',                
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\Level2a.txt',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\Level2b.txt',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2a\Level3a.txt',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2a\Level3b.txt',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2a\Level3c.txt',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2a\Level3d.txt',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2b\Level3a.txt',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2b\Level3b.txt',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2c\Level3a.txt',
+            'OK\t' + os.getcwd() + r'\Tests\SD\FolderWithFileAndSeveralSubFolderLevel3\SubFolderLevel1bis\SubFolderLevel2c\Level3b.txt',   
             ]
         
         self.__testFileProcessorCopying(inputFolder, outputFolder, expectedReport)
@@ -115,6 +115,9 @@ class FileProcessorCopyFilesTest(unittest.TestCase):
                 outputFolderInReport = outputFolderInReport + os.path.split(inputFolder)[1]
                 expectedReportForDestination[i] = s.replace(inputFolder, outputFolderInReport)
             expectedReportForDestination.append( os.getcwd() + r'\Tests\TestOuput\Report.txt')
+
+            for i, s in enumerate(expectedReportForDestination):
+                expectedReportForDestination[i] = s.replace('OK\t', '')
 
             self.__checkDirectoryTreeCopied(outputFolder, expectedReportForDestination)
 
