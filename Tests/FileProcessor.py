@@ -3,12 +3,13 @@ from shutil import copyfile
 
 class FileProcessor:
     '''A File Processor class to list and copy files and folders'''
-
+    
     def __init__(self, inputPath, destinationPath = None):
         self.Report = ''
         self.__CopyEnabled = False
         self.inputPath = self.__getAbsolutePath(inputPath) 
         self.__setDestinationPath(destinationPath)
+        self.__InitializeReport()
 
     def __setDestinationPath(self, destinationPath):
         if destinationPath is not None:
@@ -44,16 +45,6 @@ class FileProcessor:
 
             self.__ProcessDirectories(root, directories, destinationRoot)
             self.__ProcessFiles(files, root, destinationRoot)
-    
-
-        self.__PersistReport()
-
-    def __PersistReport(self):
-        if self.__CopyEnabled:
-            reportPath = os.path.join(self.destinationPath, "Report.txt")
-            text_file = open(reportPath, "w")
-            text_file.write(self.Report)
-            text_file.close()
 
     def __ProcessFiles(self, files, root, destinationRoot):
         for file in files:
@@ -69,12 +60,31 @@ class FileProcessor:
             self.__ReportFile(root, file, success)
 
     def __ReportFile(self, root, file, success):
-        self.Report += '\n'
-        if self.__CopyEnabled:
-            self.Report += success
-            self.Report += '\t'
 
-        self.Report += os.path.join(root, file)
+        textToAdd = '\n'
+        if self.__CopyEnabled:
+            textToAdd += success
+            textToAdd += '\t'
+        textToAdd += os.path.join(root, file)
+
+        self.__AddToReport(textToAdd)        
+    
+    def __AddToReport(self, textToAdd):
+        self.Report += textToAdd
+        print(textToAdd)
+        if self.__CopyEnabled:
+            reportPath = os.path.join(self.destinationPath, "Report.txt")
+            text_file = open(reportPath, "a+")
+            text_file.write(textToAdd)
+            text_file.close()
+
+    def __InitializeReport(self):
+        self.Report = ''
+        if self.__CopyEnabled:
+            reportPath = os.path.join(self.destinationPath, "Report.txt")
+            text_file = open(reportPath, "w")
+            text_file.write('')
+            text_file.close()
 
     def __ProcessDirectories(self, root, directories, destinationRoot):
         for directory in directories:
@@ -95,11 +105,15 @@ class FileProcessor:
 
     def __ValidateInputPath(self):
         if(os.path.isdir(self.inputPath)):
+            textToAdd = ''
             if self.__CopyEnabled:
-                self.Report += 'OK\t'
-            self.Report += self.inputPath
+                textToAdd += 'OK\t'
+            textToAdd += self.inputPath
+            self.__AddToReport(textToAdd)
             return True
         else:
-            self.Report += "[Error: Path does not exist] "
-            self.Report += self.inputPath
+            textToAdd = ''
+            textToAdd += "[Error: Path does not exist] "
+            textToAdd += self.inputPath
+            self.__AddToReport(textToAdd)
             return False
